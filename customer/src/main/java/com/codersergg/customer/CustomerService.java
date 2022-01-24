@@ -21,7 +21,7 @@ public class CustomerService {
                 .build();
         customerRepository.saveAndFlush(customer);
         CheckLimitResponse checkLimitResponse = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/check-limit/{customerId}",
+                "http://CHECKLIMIT/api/v1/check-limit/{customerId}",
                 CheckLimitResponse.class,
                 customer.getId()
         );

@@ -11,7 +11,8 @@
 
     <modules>
         <module>customer</module>
-        <module>check</module>
+        <module>checklimit</module>
+        <module>eureka-server</module>
     </modules>
 
     <name>checking-counter-app</name>
