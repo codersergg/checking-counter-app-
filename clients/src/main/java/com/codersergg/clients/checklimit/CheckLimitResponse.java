@@ -1,4 +1,4 @@
-package com.codersergg.checklimit;
+package com.codersergg.clients.checklimit;
 
 public record CheckLimitResponse(Boolean isExceeded) {
 }

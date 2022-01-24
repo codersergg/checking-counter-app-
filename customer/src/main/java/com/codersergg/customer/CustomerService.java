@@ -1,5 +1,7 @@
 package com.codersergg.customer;
 
+import com.codersergg.clients.checklimit.CheckLimitClient;
+import com.codersergg.clients.checklimit.CheckLimitResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +14,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
+    private final CheckLimitClient checkLimitClient;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -20,11 +23,8 @@ public class CustomerService {
                 .email(request.email().toLowerCase())
                 .build();
         customerRepository.saveAndFlush(customer);
-        CheckLimitResponse checkLimitResponse = restTemplate.getForObject(
-                "http://CHECKLIMIT/api/v1/check-limit/{customerId}",
-                CheckLimitResponse.class,
-                customer.getId()
-        );
+
+        CheckLimitResponse checkLimitResponse = checkLimitClient.isExceeded(customer.getId());
 
         if (checkLimitResponse.isExceeded()) {
             throw new IllegalStateException("exceeded");

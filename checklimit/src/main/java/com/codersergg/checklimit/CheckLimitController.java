@@ -1,5 +1,6 @@
 package com.codersergg.checklimit;
 
+import com.codersergg.clients.checklimit.CheckLimitResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
