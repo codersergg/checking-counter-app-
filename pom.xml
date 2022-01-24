@@ -11,6 +11,7 @@
 
     <modules>
         <module>customer</module>
+        <module>check</module>
     </modules>
 
     <name>checking-counter-app</name>

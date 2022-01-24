@@ -2,6 +2,7 @@ package com.codersergg.customer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final RestTemplate restTemplate;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -17,6 +19,17 @@ public class CustomerService {
                 .lastName(request.lastName())
                 .email(request.email().toLowerCase())
                 .build();
+        customerRepository.saveAndFlush(customer);
+        CheckLimitResponse checkLimitResponse = restTemplate.getForObject(
+                "http://localhost:8081/api/v1/check-limit/{customerId}",
+                CheckLimitResponse.class,
+                customer.getId()
+        );
+
+        if (checkLimitResponse.isExceeded()) {
+            throw new IllegalStateException("exceeded");
+        }
+
         customerRepository.save(customer);
     }
 
