@@ -14,6 +14,7 @@
         <module>checklimit</module>
         <module>eureka-server</module>
         <module>clients</module>
+        <module>service1</module>
     </modules>
 
     <name>checking-counter-app</name>

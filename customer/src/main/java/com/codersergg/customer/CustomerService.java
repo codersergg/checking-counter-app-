@@ -2,9 +2,11 @@ package com.codersergg.customer;
 
 import com.codersergg.clients.checklimit.CheckLimitClient;
 import com.codersergg.clients.checklimit.CheckLimitResponse;
+import com.codersergg.clients.service1.Service1Client;
+import com.codersergg.clients.service1.Service1Response;
+import com.codersergg.customer.request.CustomerRegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
+    private final Service1Client service1Client;
     private final CheckLimitClient checkLimitClient;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
@@ -32,6 +34,14 @@ public class CustomerService {
 
         customerRepository.save(customer);
     }
+
+    public void getService1(String email) {
+        if(customerRepository.findCustomerByEmail(email).isEmpty()) {
+            throw new IllegalStateException("user " + email + "{} not found");
+        }
+        service1Client.getService1(email);
+    }
+
 
     public boolean findByEmailIgnoreCase(String email) {
         String emailIgnoreCase = email.toLowerCase();
