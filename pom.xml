@@ -15,7 +15,9 @@
         <module>eureka-server</module>
         <module>clients</module>
         <module>service1</module>
+        <module>service2</module>
         <module>apigw</module>
+        <module>amqp</module>
     </modules>
 
     <name>checking-counter-app</name>

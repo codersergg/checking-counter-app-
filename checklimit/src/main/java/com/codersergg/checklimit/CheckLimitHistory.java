@@ -25,6 +25,8 @@ public class CheckLimitHistory {
     )
     private Integer id;
     private Integer customerId;
-    private Boolean isExceeded;
+    private Integer valueOfService;
+    private String serviceName;
     private LocalDateTime createdAt;
+    private String message;
 }
