@@ -26,15 +26,16 @@ public class CustomerController {
     public Customer registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
         log.info("registerCustomer()");
         String email = customerRegistrationRequest.email();
-        checkCustomerAvailability(customerService.findByEmailIgnoreCase(email).isPresent(), email + " email is already registered");
+        checkCustomerAvailability(customerService.findByEmailIgnoreCase(email).isPresent(),
+                email + " email is already registered");
 
         log.info("new customer registration {}", customerRegistrationRequest);
         return customerService.registerCustomer(customerRegistrationRequest);
     }
 
     @PostMapping("service1")
-    public ServiceResponse getServise1(@RequestBody CustomerEmailRequest customerEmailRequest) {
-        log.info("getServiсe1()");
+    public ServiceResponse getService1(@RequestBody CustomerEmailRequest customerEmailRequest) {
+        log.info("getService1()");
         String email = customerEmailRequest.email();
         Optional<Customer> optionalCustomer = customerService.findByEmailIgnoreCase(email);
         checkCustomerAvailability(optionalCustomer.isEmpty(), "email: " + email + " not registered");
@@ -44,8 +45,8 @@ public class CustomerController {
     }
 
     @PostMapping("service2")
-    public ServiceResponse getServise2(@RequestBody CustomerEmailRequest customerEmailRequest) {
-        log.info("getServiсe2()");
+    public ServiceResponse getService2(@RequestBody CustomerEmailRequest customerEmailRequest) {
+        log.info("getService2()");
         String email = customerEmailRequest.email();
         Optional<Customer> optionalCustomer = customerService.findByEmailIgnoreCase(email);
         checkCustomerAvailability(optionalCustomer.isEmpty(), "email: " + email + " not registered");

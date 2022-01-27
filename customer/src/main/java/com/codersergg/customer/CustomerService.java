@@ -34,7 +34,7 @@ public class CustomerService {
     }
 
     public ServiceResponse getService1(Optional<Customer> optionalCustomer) {
-        log.info("getServiсe1()");
+        log.info("getService1()");
         UsedLimitResponse usedLimitCustomer = getUsedLimitCustomer(optionalCustomer.get().getId());
         if (usedLimitCustomer.limit() + 1 >= 10) {
             log.info("The limit is used. Current limit: {}", usedLimitCustomer.limit());
@@ -44,7 +44,7 @@ public class CustomerService {
     }
 
     public ServiceResponse getService2(Optional<Customer> optionalCustomer) {
-        log.info("getServiсe2()");
+        log.info("getService2()");
         UsedLimitResponse usedLimitCustomer = getUsedLimitCustomer(optionalCustomer.get().getId());
         if (usedLimitCustomer.limit() + 4 >= 10) {
             log.info("The limit is used. Current limit: {}", usedLimitCustomer.limit());
