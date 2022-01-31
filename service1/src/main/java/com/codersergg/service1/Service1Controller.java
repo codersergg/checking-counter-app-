@@ -27,7 +27,7 @@ public class Service1Controller {
                 customerId,
                 1,
                 "Service1",
-                createdAt.toString(),
+                createdAt,
                 responseGetService1);
         service1Service.sendMessage2CheckLimit(response);
         return response;

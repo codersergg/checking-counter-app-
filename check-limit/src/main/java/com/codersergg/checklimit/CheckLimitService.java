@@ -28,7 +28,7 @@ public class CheckLimitService {
 
     public void send(CheckLimitRequest checkLimitRequest) {
         log.info("send");
-        LocalDateTime createdAt = LocalDateTime.parse(checkLimitRequest.createdAt());
+        LocalDateTime createdAt = checkLimitRequest.createdAt();
         checkLimitRepository.save(
                 CheckLimitHistory.builder()
                         .customerId(checkLimitRequest.toCustomerId())
